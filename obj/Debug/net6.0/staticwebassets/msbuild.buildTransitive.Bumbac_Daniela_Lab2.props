@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Bumbac_Daniela_Lab2.props" />
+</Project>
