@@ -24,14 +24,12 @@ namespace Bumbac_Daniela_Lab2.Pages.Books
 
             ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID",
  "PublisherName");
-            ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID",
- "LastName");
-            ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID",
- "FirstName");
+            /*ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "ID",
+ "AuthorName");*/
             var book = new Book();
-            return Page();
             book.BookCategories = new List<BookCategory>();
             PopulateAssignedCategoryData(_context, book);
+            return Page();
         }
 
         [BindProperty]
@@ -58,17 +56,5 @@ namespace Bumbac_Daniela_Lab2.Pages.Books
             return RedirectToPage("./Index");
         }
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
-        {
-          if (!ModelState.IsValid || _context.Book == null || Book == null)
-            {
-                return Page();
-            }
-
-            _context.Book.Add(Book);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
-        }
     }
 }

@@ -19,7 +19,7 @@ namespace Bumbac_Daniela_Lab2.Pages.Authors
             _context = context;
         }
 
-      public Author Author { get; set; } = default!; 
+        public Bumbac_Daniela_Lab2.Models.Author Author { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

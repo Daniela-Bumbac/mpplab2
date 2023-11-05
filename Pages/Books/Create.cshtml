@@ -18,11 +18,11 @@
                 <input asp-for="Book.Title" class="form-control" />
                 <span asp-validation-for="Book.Title" class="text-danger"></span>
             </div>
-           @*  <div class="form-group">
+            <div class="form-group">
                 <label asp-for="Book.Author" class="control-label"></label>
                 <input asp-for="Book.Author" class="form-control" />
                 <span asp-validation-for="Book.Author" class="text-danger"></span>
-            </div> *@
+            </div>
             <div class="form-group">
                 <label asp-for="Book.Price" class="control-label"></label>
                 <input asp-for="Book.Price" class="form-control" />
@@ -34,9 +34,11 @@
                 <span asp-validation-for="Book.PublishingDate" class="textdanger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Book.PublisherID" class="control-label">Publisher Name</label>
-                <select asp-for="Book.PublisherID" class="form-control" asp-items="ViewBag.PublisherID">
-                </select>
+                     <label asp-for="Book.PublisherID" class="control-label">Publisher Name</label>
+                    <select asp-for="Book.PublisherID" class="form-control" asp-items="ViewBag.PublisherID">
+                    </select>
+                    <span asp-validation-for="Book.PublisherID" class="text-danger"></span>
+            </div>
                 <div class="form-group">
                     <div class="table">
                         <table>
@@ -53,33 +55,16 @@
                                         <input type="checkbox"
                                         name="selectedCategories"
                                         value="@cat.CategoryID"
-                                        @(
-                                    Html.Raw(cat.Assigned ?
-"checked=\"checked\"" : "")
-                                    ) />
+                                        @(Html.Raw(cat.Assigned ?
+                                        "checked=\"checked\"" : "")) />
                                         @cat.CategoryID @: @cat.Name
                                         @:</td>
-
                                     }
-                                    }
-                            </table>
+                            @:</tr>
+                        }
+                        </table>
                 </div>
-            </div>
-
-                                    <span asp-validation-for="Book.PublisherID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Book.AuthorID" class="control-label">Author FirstName</label>
-                <select asp-for="Book.AuthorID" class="form-control" asp-items="ViewBag.AuthorID">
-                </select>
-                <span asp-validation-for="Book.AuthorID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Book.AuthorID" class="control-label">Author LastName</label>
-                <select asp-for="Book.AuthorID" class="form-control" asp-items="ViewBag.AuthorID">
-                </select>
-                <span asp-validation-for="Book.AuthorID" class="text-danger"></span>
-            </div>
+                    </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
