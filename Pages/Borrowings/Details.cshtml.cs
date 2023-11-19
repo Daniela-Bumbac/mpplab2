@@ -28,7 +28,14 @@ namespace Bumbac_Daniela_Lab2.Pages.Borrowings
                 return NotFound();
             }
 
-            var borrowing = await _context.Borrowing.FirstOrDefaultAsync(m => m.ID == id);
+            // var borrowing = await _context.Borrowing.FirstOrDefaultAsync(m => m.ID == id);
+            var borrowing = await _context.Borrowing
+             .Where(m => m.ID == id)
+             .Include(b => b.Book)
+               .ThenInclude(b => b.Author)
+             .Include(b => b.Member)
+
+     .FirstOrDefaultAsync();
             if (borrowing == null)
             {
                 return NotFound();

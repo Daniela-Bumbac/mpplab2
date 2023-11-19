@@ -20,26 +20,24 @@ namespace Bumbac_Daniela_Lab2.Pages.Borrowings
             _context = context;
         }
 
-        [BindProperty]
-        public Borrowing Borrowing { get; set; } = default!;
-
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet()
         {
-            if (id == null || _context.Borrowing == null)
-            {
-                return NotFound();
-            }
+            var bookList = _context.Book
+     .Include(b => b.Author)
+     .Select(x => new
+     {
+         x.ID,
+         BookFullName = x.Title + " - " + x.Author.LastName + " " +
+    x.Author.FirstName
+     });
 
-            var borrowing =  await _context.Borrowing.FirstOrDefaultAsync(m => m.ID == id);
-            if (borrowing == null)
-            {
-                return NotFound();
-            }
-            Borrowing = borrowing;
-           ViewData["BookID"] = new SelectList(_context.Book, "ID", "ID");
-           ViewData["MemberID"] = new SelectList(_context.Member, "ID", "ID");
+            ViewData["BookID"] = new SelectList(bookList, "ID", "BookFullName");
+            ViewData["MemberID"] = new SelectList(_context.Member, "ID", "FullName");
             return Page();
         }
+
+        [BindProperty]
+        public Borrowing Borrowing { get; set; } = default!;
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.

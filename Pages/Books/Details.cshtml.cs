@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Bumbac_Daniela_Lab2.Data;
 using Bumbac_Daniela_Lab2.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bumbac_Daniela_Lab2.Pages.Books
 {
+    [Authorize(Roles = "Admin")]
     public class DetailsModel : PageModel
     {
         private readonly Bumbac_Daniela_Lab2.Data.Bumbac_Daniela_Lab2Context _context;
